@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #04AA6D;
+}
+
+li button {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li button:hover {
+  background-color: #B2863B;
+}
+
+.metamask {
+  background-color: #FFC055;
+}
+</style>
+<script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.3/web3.min.js"
+      integrity="sha512-Ws+qbaGHSFw2Zc1e7XRpvW+kySrhmPLFYTyQ95mxAkss0sshj6ObdNP3HDWcwTs8zBJ60KpynKZywk0R8tG1GA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    >
+</script>
+</head>
+<body>
+    <% var connected = false %>
+<ul>
+  <li><a <% if (page_name === 'home') { %>class="active" <% } %> href="/">Home</a></li>
+  <li><a <% if (page_name === 'login') { %>class="active" <% } %> href="/login">Login</a></li>
+  <li><a <% if (page_name === 'register') { %>class="active" <% } %> href="/register">Register</a></li>
+  <li style="float:right"><button class = "metamask" id = "connectButton" onclick = "accessToMetamask();">Connect to Metamask</button></li>
+</ul>
+<% if (page_name === 'login' || page_name === 'home') { %>
+<script>
+    let account;
+    const connectButton = document.getElementById("connectButton");
+    const accessToMetamask = async () => {
+        if(window.ethereum !== "undefined") {
+            const accounts = await ethereum.request({ method: "eth_requestAccounts"});
+            account = accounts[0];
+            connectButton.innerHTML = account;
+        }
+    }
+
+</script>
+<% } %>
+
+</body>
+</html>
+
+
