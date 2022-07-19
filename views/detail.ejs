@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Proposal : <%=proposalTitle%></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body>
+    <script src="../dist/voteBundle.js" type="text/javascript"></script>
+	<%- include('partial/nav')%>
+	<h1>Proposal : <%=proposalTitle%></h1><br>
+      <h4>Detail</h4>
+      <label for="contract">Contract Address:</label>
+  <input type="text" id="contract" name="contract" value= <%=proposalContractAddress%> size="50" disabled><br><br>
+      <button  id = "voteButton" onclick = "getContract();">Vote Proposal</button>
+    <h4 id = "msg"><%=msg%></h4>
+
+    <script>
+        function getContract() {
+            const contractAddress = document.getElementById("contract");
+            bundle.voteProposal(contractAddress.value);
+        }
+    </script>
+  </body>
+</html>

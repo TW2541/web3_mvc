@@ -12,6 +12,7 @@ const homeRouter = require('./routes/home');
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
 const proposalRouter = require('./routes/proposal');
+const voteRouter = require('./routes/vote');
 
 
 connectDB();
@@ -31,7 +32,7 @@ app.use(cookieParser());
 app.use('/', homeRouter, loginRouter, registerRouter);
 
 // app.use(verifyJWT);
-app.use('/', proposalRouter);
+app.use('/', proposalRouter, voteRouter);
 
 mongoose.connection.once('open', () => {
     console.log("Connect to DB");

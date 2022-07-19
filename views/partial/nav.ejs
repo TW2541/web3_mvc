@@ -61,7 +61,7 @@ li button:hover {
 </script>
 </head>
 <body>
-  <% if (page_name !== 'proposal') { %>
+  <% if (page_name !== 'proposal' && page_name !== 'vote') { %>
 <ul>
   <li><a <% if (page_name === 'home') { %>class="active" <% } %> href="/">Home</a></li>
   <li><a <% if (page_name === 'login') { %>class="active" <% } %> href="/login">Login</a></li>
@@ -69,7 +69,7 @@ li button:hover {
   <li style="float:right"><button class = "metamask" id = "connectButton" onclick = "accessToMetamask();">Connect to Metamask</button></li>
 </ul>
 <% } %>
-<% if (page_name === 'proposal') { %>
+<% if (page_name === 'proposal' || page_name === 'vote') { %>
   <ul>
     <li><a <% if (page_name === 'proposal') { %>class="active" <% } %> href="/proposal">Proposal Contract</a></li>
     <li><a <% if (page_name === 'vote') { %>class="active" <% } %> href="/vote">Vote Proposal</a></li>
