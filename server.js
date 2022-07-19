@@ -7,14 +7,18 @@ const mongoose = require('mongoose');
 // const flash = require('connect-flash');
 const connectDB = require('./configs/dbConn');
 const verifyJWT = require('./middleware/verifyJWT');
+const cookieParser = require('cookie-parser');
 const homeRouter = require('./routes/home');
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
-const cookieParser = require('cookie-parser');
+const proposalRouter = require('./routes/proposal');
+
 
 connectDB();
 
 app.set ( "view engine", "ejs" );
+
+app.use('/dist',express.static(__dirname + '/dist'));
 
 // support parsing of application/json type post data
 app.use(bodyParser.json());
@@ -24,10 +28,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-app.use('/', loginRouter, registerRouter);
+app.use('/', homeRouter, loginRouter, registerRouter);
 
-app.use(verifyJWT);
-app.use('/', homeRouter);
+// app.use(verifyJWT);
+app.use('/', proposalRouter);
 
 mongoose.connection.once('open', () => {
     console.log("Connect to DB");

@@ -40,7 +40,10 @@ const authLogin = async (req, res) => {
             }
         });
         res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
-        res.status(200).json({'msg' : 'Login Success'});
+        res.render("proposal", {
+            page_name : "proposal",
+            msg : `New user ${username} has been created`
+        });
     } else {
         res.status(401).json({'error' : 'Unauthorized'});
     }

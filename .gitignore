@@ -1,3 +1,4 @@
 node_modules
 .env
 smart_contract/truffle-config.js
+.secret

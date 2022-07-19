@@ -61,13 +61,22 @@ li button:hover {
 </script>
 </head>
 <body>
+  <% if (page_name !== 'proposal') { %>
 <ul>
   <li><a <% if (page_name === 'home') { %>class="active" <% } %> href="/">Home</a></li>
   <li><a <% if (page_name === 'login') { %>class="active" <% } %> href="/login">Login</a></li>
   <li><a <% if (page_name === 'register') { %>class="active" <% } %> href="/register">Register</a></li>
   <li style="float:right"><button class = "metamask" id = "connectButton" onclick = "accessToMetamask();">Connect to Metamask</button></li>
 </ul>
-<% if (page_name === 'login' || page_name === 'home') { %>
+<% } %>
+<% if (page_name === 'proposal') { %>
+  <ul>
+    <li><a <% if (page_name === 'proposal') { %>class="active" <% } %> href="/proposal">Proposal Contract</a></li>
+    <li><a <% if (page_name === 'vote') { %>class="active" <% } %> href="/vote">Vote Proposal</a></li>
+    <li style="float:right"><button class = "metamask" id = "connectButton" onclick = "accessToMetamask();">Connect to Metamask</button></li>
+  </ul>
+  <% } %>
+<% if (page_name !== 'register') { %>
 <script>
     let account;
     const connectButton = document.getElementById("connectButton");

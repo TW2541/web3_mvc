@@ -5,11 +5,15 @@ import "./Multisig.sol";
 
 contract MultisigFactory {
 
-    function createNewPurposal(string memory _title, address[] memory _participant, uint256 _requiredCount)
+    event NewProposal(address _address);
+
+    function createNewProposal(string memory _title, address[] memory _participant, uint256 _requiredCount)
         external
-        returns (address)
-    {
+        returns (address)   {
         Multisig newContract = new Multisig(_title, _participant, _requiredCount);
+
+        emit NewProposal(address(newContract));
+        
         return address(newContract);
     }
   
