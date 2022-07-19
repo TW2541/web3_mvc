@@ -6,6 +6,9 @@
   <body>
 	<%- include('partial/nav')%>
 	<h1>Login</h1>
+	<% if(fromRegister) { %>
+	<p><%= msg %></p>
+	<% } %>
 	<form action="/login" method="post">
   	<!-- user input-->
   	Username:<br>

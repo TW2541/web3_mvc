@@ -2,10 +2,15 @@ const express = require('express');
 const app  = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+// const session = require('express-session');
+// const cookieParser = require('cookie-parser');
+// const flash = require('connect-flash');
 const connectDB = require('./configs/dbConn');
+const verifyJWT = require('./middleware/verifyJWT');
 const homeRouter = require('./routes/home');
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
+const cookieParser = require('cookie-parser');
 
 connectDB();
 
@@ -17,7 +22,12 @@ app.use(bodyParser.json());
 //support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', homeRouter, loginRouter, registerRouter);
+app.use(cookieParser());
+
+app.use('/', loginRouter, registerRouter);
+
+app.use(verifyJWT);
+app.use('/', homeRouter);
 
 mongoose.connection.once('open', () => {
     console.log("Connect to DB");

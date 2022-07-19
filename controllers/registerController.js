@@ -10,7 +10,7 @@ const getRegisterPage = (req, res) => {
 const createNewUser = async (req, res) => {
     const {username, firstname, lastname, address, password} = req.body;
     console.log(req.body);
-    if(!username || !firstname || !lastname || !address || !password) return res.status(400).json({'msg' : 'Every fields must be filled'});
+    if(!username || !firstname || !lastname || !address || !password) return res.status(400).json({'error' : 'Every fields must be filled'});
 
     // Check if username is duplicated
     const duplicate = await User.findOne({username: username}).exec();
@@ -28,7 +28,12 @@ const createNewUser = async (req, res) => {
         });
 
         console.log(result);
-        res.status(201).json({'msg' : `New user ${username} has been created`});
+        // res.status(201).json({'msg' : `New user ${username} has been created`});
+        res.render("login", {
+            page_name : "login",
+            fromRegister : true,
+            msg : `New user ${username} has been created`
+        })
     }
     catch (err) {
         res.status(500).json({'msg' : err.message});
