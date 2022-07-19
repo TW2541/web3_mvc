@@ -31,7 +31,7 @@ app.use(cookieParser());
 
 app.use('/', homeRouter, loginRouter, registerRouter);
 
-// app.use(verifyJWT);
+app.use(verifyJWT);
 app.use('/', proposalRouter, voteRouter);
 
 mongoose.connection.once('open', () => {

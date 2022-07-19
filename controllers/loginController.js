@@ -40,10 +40,13 @@ const authLogin = async (req, res) => {
             }
         });
         res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
-        res.render("proposal", {
-            page_name : "proposal",
-            msg : `New user ${username} has been created`
-        });
+        User.find({}, function(err, users) {
+            res.render("proposal", {
+                page_name : "proposal",
+                msg :`Welcome ${username}!!`,
+                userLists: users
+            });
+        })
     } else {
         res.status(401).json({'error' : 'Unauthorized'});
     }
